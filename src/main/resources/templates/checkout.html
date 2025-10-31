@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Checkout</h2>
+    <div class="alert alert-success" th:if="${orderSuccess}">
+        Your order has been placed successfully!
+    </div>
+    <div th:if="${order}">
+        <p>Order ID: <span th:text="${order.id}"></span></p>
+        <p>Order Date: <span th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+        <p>Total: ₹ <span th:text="${order.totalAmount}"></span></p>
+        <ul>
+            <li th:each="item : ${order.items}">
+                <span th:text="${item.product.name}"></span> -
+                ₹<span th:text="${item.price}"></span> ×
+                <span th:text="${item.quantity}"></span>
+            </li>
+        </ul>
+    </div>
+    <a href="/user/dashboard" class="btn btn-primary">Continue Shopping</a>
+    <a href="/user/orders" class="btn btn-success">View Orders</a>
+</div>
+</body>
+</html>
